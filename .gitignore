@@ -39,6 +39,9 @@ data/cache/
 .env.local
 .env.production
 
+# Claude Code
+.claude/
+
 # IDE
 .vscode/
 .idea/
