@@ -1,0 +1,68 @@
+{
+  "australia": {
+    "sc_rate": 1.0
+  },
+  "china": {
+    "sc_rate": 0.0
+  },
+  "japan": {
+    "sc_rate": 0.0
+  },
+  "miami": {
+    "sc_rate": 0.4
+  },
+  "canada": {
+    "sc_rate": 0.5
+  },
+  "monaco": {
+    "sc_rate": 0.6
+  },
+  "spain": {
+    "sc_rate": 0.2
+  },
+  "austria": {
+    "sc_rate": 0.25
+  },
+  "great_britain": {
+    "sc_rate": 0.2
+  },
+  "belgium": {
+    "sc_rate": 0.3
+  },
+  "hungary": {
+    "sc_rate": 0.2
+  },
+  "netherlands": {
+    "sc_rate": 0.25
+  },
+  "italy": {
+    "sc_rate": 0.2
+  },
+  "madrid": {
+    "sc_rate": 0.55
+  },
+  "azerbaijan": {
+    "sc_rate": 0.5
+  },
+  "singapore": {
+    "sc_rate": 0.55
+  },
+  "usa": {
+    "sc_rate": 0.25
+  },
+  "mexico": {
+    "sc_rate": 0.2
+  },
+  "brazil": {
+    "sc_rate": 0.45
+  },
+  "las_vegas": {
+    "sc_rate": 0.4
+  },
+  "qatar": {
+    "sc_rate": 0.2
+  },
+  "abu_dhabi": {
+    "sc_rate": 0.15
+  }
+}

@@ -1,0 +1,36 @@
+# F1 2026 Race Strategy Optimizer — Dependencies
+# Python 3.9+
+
+# Web framework
+fastapi==0.128.8
+uvicorn[standard]==0.39.0
+pydantic==2.12.5
+
+# Frontend
+streamlit==1.50.0
+
+# F1 Data
+fastf1==3.7.0
+
+# Numerical computing
+numpy==2.0.2
+scipy==1.13.1
+pandas==2.3.3
+
+# Visualisation
+plotly==6.6.0
+
+# Testing
+pytest==8.4.2
+pytest-cov==7.1.0
+
+# Utilities
+requests==2.32.5
+python-dotenv==1.2.1
+python-dateutil==2.9.0.post0
+
+# Optional: HTTP client for FastF1
+httpx==0.28.1
+
+# Stretch goal: RL agent
+gymnasium==1.1.1

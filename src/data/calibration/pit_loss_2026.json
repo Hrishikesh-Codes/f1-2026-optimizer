@@ -1,0 +1,134 @@
+{
+  "australia": {
+    "median_s": 22.4,
+    "std_s": 0.4,
+    "sample_count": 10,
+    "source": "ground_truth_2026"
+  },
+  "china": {
+    "median_s": 23.1,
+    "std_s": 0.4,
+    "sample_count": 10,
+    "source": "ground_truth_2026"
+  },
+  "japan": {
+    "median_s": 22.8,
+    "std_s": 0.4,
+    "sample_count": 10,
+    "source": "ground_truth_2026"
+  },
+  "miami": {
+    "median_s": 23.5,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "canada": {
+    "median_s": 22.0,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "monaco": {
+    "median_s": 24.5,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "spain": {
+    "median_s": 22.5,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "austria": {
+    "median_s": 21.5,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "great_britain": {
+    "median_s": 22.0,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "belgium": {
+    "median_s": 23.5,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "hungary": {
+    "median_s": 22.5,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "netherlands": {
+    "median_s": 22.5,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "italy": {
+    "median_s": 23.0,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "madrid": {
+    "median_s": 24.0,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "azerbaijan": {
+    "median_s": 24.0,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "singapore": {
+    "median_s": 25.0,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "usa": {
+    "median_s": 23.0,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "mexico": {
+    "median_s": 22.5,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "brazil": {
+    "median_s": 22.0,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "las_vegas": {
+    "median_s": 23.5,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "qatar": {
+    "median_s": 22.5,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  },
+  "abu_dhabi": {
+    "median_s": 22.5,
+    "std_s": 0.5,
+    "sample_count": 0,
+    "source": "config_default"
+  }
+}

@@ -1,0 +1,372 @@
+{
+  "australia": {
+    "C4": {
+      "linear_rate": 0.0366,
+      "cliff_lap": 25,
+      "cliff_exp": 0.02376,
+      "sample_count": 3,
+      "source": "ground_truth_2026"
+    },
+    "C5": {
+      "linear_rate": 0.03407,
+      "cliff_lap": 27,
+      "cliff_exp": 0.02644,
+      "sample_count": 1,
+      "source": "ground_truth_2026"
+    },
+    "C3": {
+      "linear_rate": 0.04941,
+      "cliff_lap": 20,
+      "cliff_exp": 0.0252,
+      "sample_count": 1,
+      "source": "ground_truth_2026"
+    }
+  },
+  "china": {
+    "C3": {
+      "linear_rate": 0.03716,
+      "cliff_lap": 25,
+      "cliff_exp": 0.02016,
+      "sample_count": 3,
+      "source": "ground_truth_2026"
+    },
+    "C4": {
+      "linear_rate": 0.03451,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022,
+      "sample_count": 1,
+      "source": "ground_truth_2026"
+    },
+    "C2": {
+      "linear_rate": 0.04026,
+      "cliff_lap": 24,
+      "cliff_exp": 0.0165,
+      "sample_count": 1,
+      "source": "ground_truth_2026"
+    }
+  },
+  "japan": {
+    "C2": {
+      "linear_rate": 0.0341,
+      "cliff_lap": 28,
+      "cliff_exp": 0.01414,
+      "sample_count": 4,
+      "source": "ground_truth_2026"
+    },
+    "C1": {
+      "linear_rate": 0.03106,
+      "cliff_lap": 30,
+      "cliff_exp": 0.0104,
+      "sample_count": 1,
+      "source": "ground_truth_2026"
+    },
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    }
+  },
+  "miami": {
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    },
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    },
+    "C5": {
+      "linear_rate": 0.056,
+      "cliff_lap": 21,
+      "cliff_exp": 0.034
+    }
+  },
+  "canada": {
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    },
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    },
+    "C5": {
+      "linear_rate": 0.056,
+      "cliff_lap": 21,
+      "cliff_exp": 0.034
+    }
+  },
+  "monaco": {
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    },
+    "C5": {
+      "linear_rate": 0.056,
+      "cliff_lap": 21,
+      "cliff_exp": 0.034
+    }
+  },
+  "spain": {
+    "C2": {
+      "linear_rate": 0.02,
+      "cliff_lap": 44,
+      "cliff_exp": 0.009
+    },
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    },
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    }
+  },
+  "austria": {
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    },
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    },
+    "C5": {
+      "linear_rate": 0.056,
+      "cliff_lap": 21,
+      "cliff_exp": 0.034
+    }
+  },
+  "great_britain": {
+    "C2": {
+      "linear_rate": 0.02,
+      "cliff_lap": 44,
+      "cliff_exp": 0.009
+    },
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    },
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    }
+  },
+  "belgium": {
+    "C1": {
+      "linear_rate": 0.014,
+      "cliff_lap": 52,
+      "cliff_exp": 0.006
+    },
+    "C2": {
+      "linear_rate": 0.02,
+      "cliff_lap": 44,
+      "cliff_exp": 0.009
+    },
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    }
+  },
+  "hungary": {
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    },
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    },
+    "C5": {
+      "linear_rate": 0.056,
+      "cliff_lap": 21,
+      "cliff_exp": 0.034
+    }
+  },
+  "netherlands": {
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    },
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    },
+    "C5": {
+      "linear_rate": 0.056,
+      "cliff_lap": 21,
+      "cliff_exp": 0.034
+    }
+  },
+  "italy": {
+    "C1": {
+      "linear_rate": 0.014,
+      "cliff_lap": 52,
+      "cliff_exp": 0.006
+    },
+    "C2": {
+      "linear_rate": 0.02,
+      "cliff_lap": 44,
+      "cliff_exp": 0.009
+    },
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    }
+  },
+  "madrid": {
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    },
+    "C5": {
+      "linear_rate": 0.056,
+      "cliff_lap": 21,
+      "cliff_exp": 0.034
+    }
+  },
+  "azerbaijan": {
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    },
+    "C5": {
+      "linear_rate": 0.056,
+      "cliff_lap": 21,
+      "cliff_exp": 0.034
+    }
+  },
+  "singapore": {
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    },
+    "C5": {
+      "linear_rate": 0.056,
+      "cliff_lap": 21,
+      "cliff_exp": 0.034
+    }
+  },
+  "usa": {
+    "C2": {
+      "linear_rate": 0.02,
+      "cliff_lap": 44,
+      "cliff_exp": 0.009
+    },
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    },
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    }
+  },
+  "mexico": {
+    "C2": {
+      "linear_rate": 0.02,
+      "cliff_lap": 44,
+      "cliff_exp": 0.009
+    },
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    },
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    }
+  },
+  "brazil": {
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    },
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    },
+    "C5": {
+      "linear_rate": 0.056,
+      "cliff_lap": 21,
+      "cliff_exp": 0.034
+    }
+  },
+  "las_vegas": {
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    },
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    },
+    "C5": {
+      "linear_rate": 0.056,
+      "cliff_lap": 21,
+      "cliff_exp": 0.034
+    }
+  },
+  "qatar": {
+    "C1": {
+      "linear_rate": 0.014,
+      "cliff_lap": 52,
+      "cliff_exp": 0.006
+    },
+    "C2": {
+      "linear_rate": 0.02,
+      "cliff_lap": 44,
+      "cliff_exp": 0.009
+    },
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    }
+  },
+  "abu_dhabi": {
+    "C3": {
+      "linear_rate": 0.028,
+      "cliff_lap": 36,
+      "cliff_exp": 0.014
+    },
+    "C4": {
+      "linear_rate": 0.04,
+      "cliff_lap": 27,
+      "cliff_exp": 0.022
+    },
+    "C5": {
+      "linear_rate": 0.056,
+      "cliff_lap": 21,
+      "cliff_exp": 0.034
+    }
+  }
+}
