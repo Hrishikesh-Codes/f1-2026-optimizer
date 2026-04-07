@@ -32,5 +32,3 @@ python-dateutil==2.9.0.post0
 # Optional: HTTP client for FastF1
 httpx==0.28.1
 
-# Stretch goal: RL agent
-gymnasium==1.1.1
