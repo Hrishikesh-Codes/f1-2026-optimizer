@@ -218,7 +218,7 @@ def render() -> None:
         })
 
     df_strats = pd.DataFrame(all_rows)
-    st.dataframe(df_strats, hide_index=True, use_container_width=True, height=280)
+    st.dataframe(df_strats, hide_index=True, use_container_width=True)
 
     # --- Strategy win distribution ---
     st.subheader("Strategy Win Distribution (across all simulations)")
