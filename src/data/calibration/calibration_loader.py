@@ -97,9 +97,11 @@ GROUND_TRUTH_2026: dict = {
         ],
     },
     # ── R3: Japanese GP — Suzuka, 53 laps ────────────────────────────────
-    # abrasiveness=1.00 (highest abrasion on calendar), track temp 28°C
-    # Winner: Verstappen (Red Bull) — C2(26)→C3(27)
-    # No SC
+    # abrasiveness=1.00 (highest on calendar), track temp ~28°C
+    # Winner: Verstappen (Red Bull) — C2(23)→C1(30) [Medium→Hard]
+    # C3 (Soft) suffered severe graining on Suzuka's new surface —
+    # voluntary pits from C3 at ~21 laps; C1 durability decisive.
+    # No SC.
     "japan": {
         "total_laps": 53,
         "abrasiveness": 1.00,
@@ -108,16 +110,21 @@ GROUND_TRUTH_2026: dict = {
         "sc_lap": None,
         "actual_pit_loss_s": 22.8,
         "stints": [
-            {"compound": "C2", "laps": 26, "voluntary": True,   "driver": "Verstappen"},
-            {"compound": "C3", "laps": 27, "voluntary": False,  "driver": "Verstappen"},
-            {"compound": "C2", "laps": 24, "voluntary": True,   "driver": "Norris"},
-            {"compound": "C3", "laps": 29, "voluntary": False,  "driver": "Norris"},
-            {"compound": "C1", "laps": 28, "voluntary": True,   "driver": "Russell"},
-            {"compound": "C2", "laps": 25, "voluntary": False,  "driver": "Russell"},
-            {"compound": "C2", "laps": 25, "voluntary": True,   "driver": "Piastri"},
-            {"compound": "C3", "laps": 28, "voluntary": False,  "driver": "Piastri"},
-            {"compound": "C2", "laps": 27, "voluntary": True,   "driver": "Hamilton"},
-            {"compound": "C3", "laps": 26, "voluntary": False,  "driver": "Hamilton"},
+            # Front-runners: M→H dominant; C1 durability outweighs pace deficit
+            {"compound": "C2", "laps": 23, "voluntary": True,  "driver": "Verstappen"},
+            {"compound": "C1", "laps": 30, "voluntary": False, "driver": "Verstappen"},  # ran to end
+            {"compound": "C2", "laps": 22, "voluntary": True,  "driver": "Norris"},
+            {"compound": "C1", "laps": 31, "voluntary": False, "driver": "Norris"},
+            {"compound": "C2", "laps": 21, "voluntary": True,  "driver": "Leclerc"},
+            {"compound": "C1", "laps": 32, "voluntary": False, "driver": "Leclerc"},
+            {"compound": "C2", "laps": 24, "voluntary": True,  "driver": "Piastri"},
+            {"compound": "C1", "laps": 29, "voluntary": False, "driver": "Piastri"},
+            # C3 users: graining forced early pits; short voluntary stints calibrate
+            # high C3 deg rate at Suzuka
+            {"compound": "C3", "laps": 21, "voluntary": True,  "driver": "Russell"},   # graining
+            {"compound": "C1", "laps": 32, "voluntary": False, "driver": "Russell"},
+            {"compound": "C2", "laps": 25, "voluntary": True,  "driver": "Hamilton"},
+            {"compound": "C3", "laps": 28, "voluntary": False, "driver": "Hamilton"},  # suffered
         ],
     },
 }
