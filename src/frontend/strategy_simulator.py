@@ -179,7 +179,10 @@ def render() -> None:
     ci_lo, ci_hi = result.confidence_interval_95
     st.subheader("Optimal Strategy")
     bcol1, bcol2, bcol3, bcol4 = st.columns(4)
-    bcol1.metric("Strategy", opt.compound_sequence)
+    bcol1.metric("Strategy", "-".join(
+        compound_label(s.compound, circuit_cfg.compounds)[0]
+        for s in opt.stints
+    ))
     bcol2.metric("Stops", opt.num_stops)
     bcol3.metric("Pit Laps", ", ".join(str(l) for l in opt.pit_laps) or "—")
     bcol4.metric("Expected Race Time", _fmt_time(result.optimal_strategy_mean_time))
@@ -218,7 +221,7 @@ def render() -> None:
         })
 
     df_strats = pd.DataFrame(all_rows)
-    st.dataframe(df_strats, hide_index=True, use_container_width=True)
+    st.table(df_strats)
 
     # --- Strategy win distribution ---
     st.subheader("Strategy Win Distribution (across all simulations)")

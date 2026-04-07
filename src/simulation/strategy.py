@@ -54,9 +54,8 @@ class Strategy:
 
     @property
     def compound_sequence(self) -> str:
-        """Human-readable compound sequence, e.g. 'M-H' or 'S-M-H'."""
-        abbr = {"C1": "H", "C2": "H", "C3": "M", "C4": "S", "C5": "S"}
-        return "-".join(abbr.get(s.compound, s.compound[1]) for s in self.stints)
+        """Human-readable compound sequence using raw codes, e.g. 'C2-C3'."""
+        return "-".join(s.compound for s in self.stints)
 
     @property
     def full_compound_sequence(self) -> str:
