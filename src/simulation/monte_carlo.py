@@ -19,6 +19,7 @@ Stochastic variables sampled per simulation:
 
 from __future__ import annotations
 
+import math
 import numpy as np
 from dataclasses import dataclass, field
 from typing import List, Dict, Optional, Tuple
@@ -344,15 +345,23 @@ class MonteCarloSimulator:
                 # Compound offset
                 base += compound_cfg.base_pace_offset
 
-                # Tyre degradation
+                # Tyre degradation (circuit calibration active)
                 deg = self.tyre_model.compute_lap_time_delta(
                     compound=stint.compound,
                     lap_in_stint=tyre_age + 1,
                     track_abrasiveness=circuit_cfg.track_abrasiveness,
                     track_temp_celsius=track_temp_c,
                     push_level=stint.push_level if not under_sc else 0.4,
+                    circuit=circuit,
                 ) * deg_multiplier
                 base += deg
+
+                # Tyre warm-up penalty: first 3 laps after a pit stop
+                # (cold tyres on out-lap; not applied to opening stint —
+                #  formation/parade lap heats them adequately)
+                if stint_idx > 0 and tyre_age < 3:
+                    _warmup = [0.50, 0.20, 0.08]
+                    base += _warmup[tyre_age]
 
                 # ERS
                 ers_delta, ers_state = self.ers_model.compute_lap_ers_delta(
@@ -367,8 +376,12 @@ class MonteCarloSimulator:
                 # Team delta
                 base += team_cfg.base_lap_delta
 
-                # Track evolution
-                evo = circuit_cfg.track_evolution_rate * min(race_lap, 25) * (-1.0)
+                # Track evolution: exponential approach to asymptote
+                # Replaces hard cap at lap 25 — rubber keeps improving but
+                # with diminishing returns beyond lap 30
+                evo = -circuit_cfg.track_evolution_rate * 25.0 * (
+                    1.0 - math.exp(-race_lap / 25.0)
+                )
                 base += evo
 
                 # Noise

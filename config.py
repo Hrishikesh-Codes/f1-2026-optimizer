@@ -79,53 +79,53 @@ class PowerUnitConfig:
 TYRE_COMPOUNDS: Dict[str, TyreCompoundConfig] = {
     "C1": TyreCompoundConfig(
         name="C1", label="Hard", color="#FFFFFF",
-        base_pace_offset=+0.90,
+        base_pace_offset=+0.45,   # race pace gap vs C3 ~0.45s (quali gap ~0.9s)
         linear_deg_rate=0.014,
         cliff_lap=52,
         cliff_exponent=0.006,
         thermal_sensitivity=0.06,
         max_viable_laps=65,
-        min_recommended_laps=12,
+        min_recommended_laps=15,  # needs 15 laps min to justify Hard compound
     ),
     "C2": TyreCompoundConfig(
         name="C2", label="Hard", color="#FFFFFF",
-        base_pace_offset=+0.50,
+        base_pace_offset=+0.25,   # race pace gap vs C3 ~0.25s
         linear_deg_rate=0.020,
         cliff_lap=44,
         cliff_exponent=0.009,
         thermal_sensitivity=0.08,
         max_viable_laps=55,
-        min_recommended_laps=10,
+        min_recommended_laps=12,
     ),
     "C3": TyreCompoundConfig(
         name="C3", label="Medium", color="#FFD700",
-        base_pace_offset=0.00,   # baseline reference compound
+        base_pace_offset=0.00,    # baseline reference compound
         linear_deg_rate=0.028,
         cliff_lap=36,
         cliff_exponent=0.014,
         thermal_sensitivity=0.10,
         max_viable_laps=45,
-        min_recommended_laps=8,
+        min_recommended_laps=10,
     ),
     "C4": TyreCompoundConfig(
         name="C4", label="Soft", color="#DC0000",
-        base_pace_offset=-0.32,
+        base_pace_offset=-0.25,   # race pace gap vs C3 ~0.25s
         linear_deg_rate=0.040,
         cliff_lap=27,
         cliff_exponent=0.022,
-        thermal_sensitivity=0.14,
-        max_viable_laps=34,
-        min_recommended_laps=6,
+        thermal_sensitivity=0.12, # reduced from 0.14 — softs not 4× more sensitive than Hard
+        max_viable_laps=32,       # reduced from 34 based on actual stint data
+        min_recommended_laps=8,
     ),
     "C5": TyreCompoundConfig(
         name="C5", label="Soft", color="#DC0000",
-        base_pace_offset=-0.60,
+        base_pace_offset=-0.45,   # race pace gap vs C3 ~0.45s
         linear_deg_rate=0.056,
         cliff_lap=21,
         cliff_exponent=0.034,
-        thermal_sensitivity=0.18,
-        max_viable_laps=27,
-        min_recommended_laps=5,
+        thermal_sensitivity=0.14, # reduced from 0.18
+        max_viable_laps=25,       # reduced from 27
+        min_recommended_laps=7,
     ),
 }
 
@@ -545,7 +545,9 @@ SC_PARAMS = {
     "sc_field_compression_s": 30.0,         # seconds by which gap is compressed under SC
     "free_pit_window_laps": 3,              # laps after SC deployment = free pit
     # Timing distribution (relative weights: early/mid/late)
-    "sc_timing_weights": [0.40, 0.35, 0.25],
+    # Real F1 2022-2024 data: incidents cluster mid-to-late race (accumulated damage,
+    # tyre failures, strategy battles). Early incidents are less common.
+    "sc_timing_weights": [0.25, 0.45, 0.30],
     "sc_timing_boundaries": [0.28, 0.57],   # as fraction of total laps
 }
 
@@ -556,7 +558,8 @@ SC_PARAMS = {
 
 FUEL_PARAMS = {
     "fuel_load_kg": 100.0,
-    "fuel_effect_per_kg_s": 0.032,   # seconds of lap time per kg of fuel
+    "fuel_effect_per_kg_s": 0.028,   # seconds of lap time per kg of fuel
+                                      # (real F1 2024 data: ~0.028-0.030 s/kg)
     "fuel_burn_variance": 0.04,      # ±4% lap-to-lap variance
     "min_fuel_kg": 1.0,              # FIA minimum fuel at race end
 }
@@ -568,13 +571,13 @@ FUEL_PARAMS = {
 
 SIM_PARAMS = {
     "default_simulations": 2000,
-    "deg_variance_sigma": 0.10,          # ±10% degradation rate variation
-    "lap_time_noise_sigma": 0.05,        # ±0.05s gaussian lap-time noise
+    "deg_variance_sigma": 0.12,          # ±12% degradation rate variation (real F1 ~10-15%)
+    "lap_time_noise_sigma": 0.08,        # ±0.08s gaussian lap-time noise (traffic/minor errors)
     "rival_strategy_options": 3,         # how many rival strategy variants to sample
     "strategy_window_s": 5.0,           # strategies within this of optimal = "alternative"
     "min_stop_spacing_laps": 10,         # minimum laps between pit stops
     "sc_impact_test_laps": [10, 20, 30, 40],  # lap numbers to test SC impact
-    "track_temp_variation_sigma": 3.0,   # °C variation in track temp sampling
+    "track_temp_variation_sigma": 4.0,   # °C variation in track temp sampling (real ~3-5°C)
     "baseline_track_temp_c": 35.0,
 }
 

@@ -231,23 +231,33 @@ class SafetyCarModel:
         pit_laps = set(strategy.pit_laps)
 
         for event in sc_events:
-            compression = (
-                SC_PARAMS["sc_field_compression_s"]
-                if event.event_type == "SC"
-                else SC_PARAMS["sc_field_compression_s"] * 0.5
-            )
+            if event.event_type == "SC":
+                # Full SC compresses the field — worth ~30s if pitting under it
+                compression = SC_PARAMS["sc_field_compression_s"]
+                free_window = event.free_pit_window_end
+            else:
+                # VSC does NOT compress the field (cars hold their gaps).
+                # Strategic benefit is reduced pit-lane time loss only:
+                # field is slow so your pit-lane speed limit costs ~60% less
+                compression = 0.0
+                free_window = event.free_pit_window_end
 
             this_strategy_pits_free = any(
-                event.deploy_lap <= pl <= event.free_pit_window_end
+                event.deploy_lap <= pl <= free_window
                 for pl in pit_laps
             )
 
             if this_strategy_pits_free:
-                # Free pit stop: save ~80% of pit loss time vs staying out
-                net_delta -= pit_loss_time * 0.80
+                if event.event_type == "SC":
+                    # Free pit under SC: save ~80% of pit loss vs staying out
+                    net_delta -= pit_loss_time * 0.80
+                else:
+                    # VSC pit: save ~35% of pit loss (pit lane still costs time
+                    # since VSC speed is higher than SC speed)
+                    net_delta -= pit_loss_time * 0.35
             else:
-                # Rivals on alternate strategies can take a free pit; we cannot
-                # → approximate position/time loss vs the field
-                net_delta += compression * 0.35
+                if event.event_type == "SC":
+                    # Rivals can take a free SC pit; we lose ground vs field
+                    net_delta += compression * 0.35
 
         return net_delta

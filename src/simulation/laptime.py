@@ -18,6 +18,7 @@ This model focuses purely on green-flag racing laps.
 
 from __future__ import annotations
 
+import math
 import numpy as np
 from dataclasses import dataclass
 from typing import List, Tuple, Optional
@@ -93,6 +94,7 @@ class LapTimeModel:
             track_abrasiveness=circuit_cfg.track_abrasiveness,
             track_temp_celsius=inputs.track_temp_c,
             push_level=inputs.push_level,
+            circuit=inputs.circuit,
         ) * inputs.deg_multiplier
         lap_time += deg_penalty
 
@@ -111,10 +113,11 @@ class LapTimeModel:
         lap_time += team_cfg.base_lap_delta
 
         # ---- Track evolution (rubber = faster as laps go by) ----
-        # Decreasing benefit: most rubber laid in first 20 laps
-        track_evo = circuit_cfg.track_evolution_rate * min(
-            inputs.lap_number, 25
-        ) * (-1.0)   # negative → faster
+        # Exponential approach: most benefit in first 25 laps but continues
+        # to improve — replaces the hard cap at lap 25
+        track_evo = -circuit_cfg.track_evolution_rate * 25.0 * (
+            1.0 - math.exp(-inputs.lap_number / 25.0)
+        )
         lap_time += track_evo
 
         # ---- Gaussian noise ----
