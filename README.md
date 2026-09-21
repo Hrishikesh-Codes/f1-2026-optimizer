@@ -4,15 +4,13 @@
 
 ---
 
-## Live Demo
-
-[Launch on Streamlit Community Cloud](https://your-app-name.streamlit.app) *(deploy and replace this link)*
+> **Running it:** the dashboard is a local Streamlit app — `streamlit run app.py`, no API keys required. FastF1 pulls telemetry from the official F1 timing feed on first run and caches it locally. Full setup is under [Getting Started](#getting-started).
 
 ---
 
 ## Overview
 
-The F1 2026 Race Strategy Optimizer is a physics-based simulation engine that models every dimension of a Formula 1 race strategy under the new 2026 technical regulations. It runs up to 2,000 Monte Carlo simulations per strategy candidate, stochastically sampling tyre degradation variance, safety car deployments, track temperature, and fuel burn to produce statistically robust recommendations with 95% confidence intervals. The engine encodes the major 2026 regulation changes — the 50/50 ICE/ERS power split, elimination of the MGU-H, Active Aerodynamics replacing DRS, the new Overtake Override Mode (OOM), and Pirelli's revised C1–C5 tyre range — and is calibrated against ground-truth stint data from the first three 2026 Grands Prix. A six-page Streamlit dashboard and a FastAPI REST backend make the engine accessible both interactively and programmatically.
+The F1 2026 Race Strategy Optimizer is a physics-based simulation engine that models every dimension of a Formula 1 race strategy under the new 2026 technical regulations. It runs up to 2,000 Monte Carlo simulations per strategy candidate, stochastically sampling tyre degradation variance, safety car deployments, track temperature, and fuel burn to produce statistically robust recommendations with 95% confidence intervals. The engine encodes the major 2026 regulation changes — the 50/50 ICE/ERS power split, elimination of the MGU-H, Active Aerodynamics replacing DRS, the new Overtake Override Mode (OOM), and Pirelli's revised C1–C5 tyre range — and is calibrated against ground-truth stint data from the first three 2026 Grands Prix. A seven-page Streamlit dashboard and an 11-endpoint FastAPI backend make the engine accessible both interactively and programmatically.
 
 ---
 
@@ -24,8 +22,8 @@ The F1 2026 Race Strategy Optimizer is a physics-based simulation engine that mo
 - **Safety Car & VSC Simulation** — circuit-specific deployment probabilities, random timing/duration sampling, free-pit-window detection, and lap-time multipliers applied per lap
 - **FastF1 Telemetry Integration** — fetches historical and live stint data via the FastF1 API, caches to SQLite, and feeds automated tyre-degradation calibration
 - **Live Race Monitor** — real-time strategy recommendations per driver with tyre age tracking and pit-window alerting; supports live timing, cached replay, and synthetic fallback modes
-- **FastAPI REST Backend** — `/simulate`, `/stint/analyze`, `/oom/analyze`, and reference-data endpoints with full Pydantic request/response validation
-- **Six-Page Streamlit Dashboard** — strategy optimizer, tyre degradation viewer, energy/OOM analyzer, live monitor, season overview, and model accuracy tracker
+- **FastAPI REST Backend** — 11 endpoints across strategy, tyre, season and reference data, with full Pydantic request/response validation
+- **Seven-Page Streamlit Dashboard** — strategy optimizer, tyre degradation viewer, stint calculator, energy/OOM analyzer, live race monitor, season overview, and model accuracy tracker
 - **Season Accuracy Tracking** — compares predicted stop-count and compound choices against actual 2026 results; 100% accurate across the first three completed rounds
 
 ---
@@ -49,52 +47,65 @@ The F1 2026 Race Strategy Optimizer is a physics-based simulation engine that mo
 ## Project Structure
 
 ```
-f1_2026_optimizer/
-├── app.py                        # Streamlit entry point
-├── main.py                       # FastAPI entry point
-├── config.py                     # 2026 regulations, all 22 circuits, teams, tyre compounds
+f1-2026-optimizer/
+├── app.py                          # Streamlit entry point + page router
+├── main.py                         # FastAPI entry point
+├── config.py                       # 2026 regulations, 22 circuits, teams, compounds (682 lines)
 ├── requirements.txt
 │
-├── models/                       # Core simulation engine (~1,500 lines)
-│   ├── monte_carlo.py            # Monte Carlo optimizer (2,000-run stochastic engine)
-│   ├── tyre.py                   # Tyre degradation model (linear + cliff phases)
-│   ├── ers.py                    # ERS/OOM model (50/50 hybrid, Super Clip, Lift-off)
-│   ├── strategy.py               # Strategy generation & 2026 rules validation
-│   ├── safety_car.py             # SC/VSC deployment model
-│   ├── laptime.py                # Per-lap time assembly
-│   └── __init__.py
+├── src/simulation/                 # Core engine — 2,037 lines
+│   ├── monte_carlo.py              # Stochastic optimizer, 2,000 runs/strategy (539)
+│   ├── tyre.py                     # Degradation model, linear + cliff phases (361)
+│   ├── strategy.py                 # Strategy generation & 2026 rules validation (320)
+│   ├── ers.py                      # ERS/OOM model — 50/50 hybrid, Super Clip, Lift-off (291)
+│   ├── safety_car.py               # SC/VSC deployment model (263)
+│   └── laptime.py                  # Per-lap time assembly (247)
 │
-├── ui/                           # Streamlit dashboard pages (~2,200 lines)
-│   ├── app.py                    # Page router
-│   ├── strategy_simulator.py     # Main strategy optimizer
-│   ├── tyre_viewer.py            # Tyre degradation curves
-│   ├── oom_analyzer.py           # Overtake Override Mode analyzer
-│   ├── live_dashboard.py         # Real-time race monitor
-│   ├── season_overview.py        # 22-round season calendar
-│   ├── accuracy_tracker.py       # Prediction vs actual results
-│   ├── styles.py                 # Custom dark F1 theme (CSS)
-│   └── __init__.py
+├── src/frontend/                   # Streamlit dashboard — 2,191 lines
+│   ├── strategy_simulator.py       # Main optimizer page (322)
+│   ├── oom_analyzer.py             # Overtake Override Mode analyzer (359)
+│   ├── stint_calculator.py         # Stint/undercut calculator (312)
+│   ├── live_dashboard.py           # Real-time race monitor (286)
+│   ├── tyre_viewer.py              # Degradation curves (277)
+│   ├── season_overview.py          # 22-round calendar (246)
+│   ├── accuracy_tracker.py         # Prediction vs actual (178)
+│   └── styles.py                   # Dark F1 theme (200)
 │
-├── api/
-│   ├── routes.py                 # REST API endpoints
-│   └── __init__.py
+├── src/api/
+│   └── routes.py                   # 11 REST endpoints (420 lines)
 │
-├── data/
-│   ├── fastf1_loader.py          # FastF1 API integration + SQLite caching
-│   ├── calibration/
-│   │   ├── calibration_loader.py # Loads 2026 ground-truth stint data
-│   │   ├── deg_curves.json       # Tyre degradation per circuit
-│   │   ├── pit_loss_2026.json    # Pit stop time loss per circuit
-│   │   └── sc_history.json       # Safety car probability history
-│   └── live/                     # Cached live race lap data
+├── src/data/
+│   ├── fastf1_loader.py            # FastF1 integration + SQLite caching (615)
+│   └── calibration/
+│       ├── calibration_loader.py   # 2026 ground-truth stint data (616)
+│       ├── deg_curves.json         # Tyre degradation per circuit
+│       ├── pit_loss_2026.json      # Pit loss per circuit
+│       └── sc_history.json         # Safety car probability history
 │
-└── tests/                        # ~770 lines of test coverage
-    ├── test_monte_carlo.py
-    ├── test_tyre.py
-    ├── test_oom.py
-    ├── test_calibration.py
-    └── test_live.py
+└── tests/                          # 774 lines
+    ├── test_oom.py (272)  test_monte_carlo.py (201)  test_tyre.py (201)
+    └── test_calibration.py (59)    test_live.py (40)
 ```
+
+---
+
+## REST API
+
+| Method | Route | Description |
+|---|---|---|
+| POST | `/simulate` | Run the Monte Carlo optimizer for a circuit/team |
+| POST | `/stint/analyze` | Stint and undercut analysis |
+| POST | `/oom/analyze` | Overtake Override Mode decision analysis |
+| GET | `/tyre/degradation` | Degradation curve for a compound/circuit |
+| GET | `/circuits` | All 22 circuits |
+| GET | `/circuits/{circuit_key}` | Single circuit reference data |
+| GET | `/teams` | Team reference data |
+| GET | `/compounds` | Pirelli C1–C5 compound specs |
+| GET | `/regulations` | 2026 regulation constants |
+| GET | `/historical/{circuit_key}/{season}` | Historical stint data via FastF1 |
+| GET | `/season/overview` | Season calendar and status |
+
+Interactive docs at `http://localhost:8000/docs` once the server is running.
 
 ---
 
@@ -109,8 +120,8 @@ f1_2026_optimizer/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/f1_2026_optimizer.git
-cd f1_2026_optimizer
+git clone https://github.com/Hrishikesh-Codes/f1-2026-optimizer.git
+cd f1-2026-optimizer
 
 # 2. Create and activate a virtual environment
 python -m venv .venv
@@ -191,22 +202,7 @@ The ERS model tracks battery state (MJ) lap-by-lap under two recovery modes: Sup
 | R3 | Japan | 1-stop | 1-stop (Verstappen) | Yes |
 | R4+ | ... | ... | *Season ongoing* | ... |
 
-**Current accuracy: 3/3 (100%) on completed rounds** — strategy stop-count prediction.
-
----
-
-## Screenshots
-
-| Page | Preview |
-|------|---------|
-| Strategy Optimizer | ![Strategy Optimizer](docs/screenshots/strategy_optimizer.png) |
-| Tyre Degradation Curves | ![Tyre Viewer](docs/screenshots/tyre_viewer.png) |
-| Live Race Monitor | ![Live Dashboard](docs/screenshots/live_dashboard.png) |
-| Energy & OOM Analyzer | ![OOM Analyzer](docs/screenshots/oom_analyzer.png) |
-| Season Overview | ![Season Overview](docs/screenshots/season_overview.png) |
-| Accuracy Tracker | ![Accuracy Tracker](docs/screenshots/accuracy_tracker.png) |
-
-*Populate `docs/screenshots/` with captures from the running app to fill in this section.*
+**Accuracy at time of calibration: 3/3 on stop-count prediction**, measured across Rounds 1–3 (Australia, China, Japan) — the rounds the tyre model was calibrated against. The figures above are a snapshot from that calibration run, not a live-updating season tracker; rerun the Accuracy Tracker page to score later rounds.
 
 ---
 
